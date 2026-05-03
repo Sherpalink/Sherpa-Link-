@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sherpa Link — Your Business, Elevated</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #7a6228;
+    --dark: #0A0A0B;
+    --dark2: #111113;
+    --dark3: #1A1A1E;
+    --dark4: #222228;
+    --text: #E8E6DF;
+    --muted: #8a8880;
+    --white: #FAF8F2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .logo span { color: var(--gold); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.4rem;
+  }
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1.8rem;
+    width: fit-content;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 820px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 1.6rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.8rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-secondary {
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-secondary:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    animation: fadeUp 0.9s ease 0.4s both;
+    flex-wrap: wrap;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 5%; }
+
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    max-width: 560px;
+    font-size: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  /* SERVICES */
+  #services { background: var(--dark2); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .service-card {
+    background: var(--dark2);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover { background: var(--dark3); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .service-card p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  /* FUNDING HIGHLIGHT */
+  #funding {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+  #funding::before {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .funding-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .funding-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .funding-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .feature-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.55rem;
+  }
+
+  .feature-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+  }
+
+  .feature-text p {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .funding-visual {
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .funding-visual-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .amount-display {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .amount-display span { color: var(--gold); }
+
+  .amount-sub {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-bar {
+    background: var(--dark4);
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    animation: fillBar 2s ease 0.5s both;
+  }
+  @keyframes fillBar {
+    from { width: 0; }
+    to { width: var(--w); }
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  /* AFFILIATES */
+  #affiliates { background: var(--dark2); }
+
+  .affiliates-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .affiliate-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .affiliate-card {
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 1.8rem;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color 0.25s, transform 0.25s, background 0.25s;
+    display: block;
+  }
+  .affiliate-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-4px);
+    background: var(--dark4);
+  }
+
+  .affiliate-card .aff-icon { font-size: 1.6rem; margin-bottom: 0.8rem; display: block; }
+  .affiliate-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .affiliate-card p { font-size: 0.82rem; color: var(--muted); }
+  .affiliate-card .aff-arrow {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* WHATSAPP */
+  #community {
+    background: var(--dark);
+    text-align: center;
+  }
+
+  .wa-block {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .wa-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  #community .section-title { text-align: center; }
+  #community .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+
+  /* CONTACT */
+  #contact { background: var(--dark2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { resize: vertical; min-height: 110px; }
+  .form-field select option { background: var(--dark3); }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-item-icon {
+    font-size: 1.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(201,168,76,0.1);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-item-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+  .contact-item-text p, .contact-item-text a {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .contact-item-text a:hover { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+
+  footer p {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  footer nav ul {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* NEW SECTIONS CSS */
+
+  /* CLEARANCE DEALS */
+  #clearance { background: var(--dark); }
+
+  .deals-banner {
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.88rem;
+    color: var(--gold);
+  }
+  .deals-banner span { font-size: 1.3rem; }
+
+  .deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .deal-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .deal-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.3); }
+
+  .deal-img-placeholder {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    background: var(--dark4);
+    position: relative;
+  }
+  .deal-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .deal-body { padding: 1.2rem; }
+  .deal-body h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .deal-body p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+
+  .deal-pricing {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .deal-price { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+  .deal-original { font-size: 0.82rem; color: var(--muted); text-decoration: line-through; }
+  .deal-saving { font-size: 0.72rem; background: rgba(201,168,76,0.12); color: var(--gold); padding: 0.15rem 0.5rem; border-radius: 2px; font-weight: 500; }
+
+  .deal-cta {
+    display: block;
+    text-align: center;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold);
+    padding: 0.6rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+  .deal-cta:hover { background: var(--gold); color: var(--dark); }
+
+  /* BUY & SELL */
+  #buysell { background: var(--dark2); }
+
+  .buysell-tabs {
+    display: flex;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    width: fit-content;
+    margin-bottom: 2.5rem;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    color: var(--muted);
+    padding: 0.7rem 1.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active { background: var(--gold); color: var(--dark); font-weight: 500; }
+  .tab-btn:hover:not(.active) { background: rgba(201,168,76,0.08); color: var(--text); }
+
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .listing-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 3px;
+    padding: 1.8rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .listing-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); }
+  .listing-type { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; display: block; }
+  .listing-card h4 { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--white); font-size: 1rem; margin-bottom: 0.4rem; }
+  .listing-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.2rem; }
+  .listing-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+  .meta-pill { font-size: 0.75rem; background: rgba(255,255,255,0.05); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 2px; }
+  .listing-ask { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; }
+  .listing-btn { display: block; text-align: center; border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 0.55rem; border-radius: 2px; text-decoration: none; font-size: 0.82rem; transition: background 0.2s, color 0.2s; }
+  .listing-btn:hover { background: var(--gold); color: var(--dark); }
+
+  .buysell-submit {
+    margin-top: 3rem;
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .buysell-submit-text { flex: 1; min-width: 200px; }
+  .buysell-submit-text h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+  .buysell-submit-text p { font-size: 0.88rem; color: var(--muted); }
+
+  /* TAX & STRUCTURING */
+  #tax { background: var(--dark); }
+
+  .tax-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .enterprise-diagram {
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+  .diagram-title { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; text-align: center; }
+  .diagram-tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .diagram-node { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 3px; padding: 0.65rem 1.2rem; font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--gold); text-align: center; }
+  .diagram-node.root { background: var(--gold); color: var(--dark); font-size: 0.88rem; padding: 0.75rem 1.8rem; }
+  .diagram-connector { width: 1px; height: 22px; background: rgba(201,168,76,0.3); }
+  .diagram-row { display: flex; gap: 0.8rem; justify-content: center; width: 100%; }
+  .diagram-branch { display: flex; flex-direction: column; align-items: center; }
+
+  .tax-features { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 1rem; }
+  .tax-feature { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .tax-icon { width: 2.8rem; height: 2.8rem; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .tax-feature-text h4 { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .tax-feature-text p { font-size: 0.88rem; color: var(--muted); }
+
+  .tax-packages { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .tax-pkg { background: var(--dark3); border: 1px solid rgba(255,255,255,0.06); border-radius: 3px; padding: 1.5rem; transition: border-color 0.25s; }
+  .tax-pkg:hover { border-color: rgba(201,168,76,0.3); }
+  .tax-pkg.featured { border-color: rgba(201,168,76,0.4); background: linear-gradient(135deg, rgba(201,168,76,0.07), transparent); }
+  .pkg-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; display: block; }
+  .tax-pkg h4 { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--white); font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .tax-pkg p { font-size: 0.8rem; color: var(--muted); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+    margin: 0 5%;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .funding-grid, .affiliates-intro, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Sherpa<span>Link</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#funding">Funding</a></li>
+    <li><a href="#clearance">Deals</a></li>
+    <li><a href="#buysell">Buy & Sell</a></li>
+    <li><a href="#tax">Tax & Structure</a></li>
+    <li><a href="#affiliates">Partners</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div style="position:relative;">
+    <span class="hero-tag">Wholesale · Bitcoin ATM · Business Funding</span>
+    <h1>Your Business<br/><em>Elevated.</em><br/>Every Step.</h1>
+    <p class="hero-sub">Sherpa Link connects businesses to wholesale deals, Bitcoin ATM opportunities, finance solutions, and funding — so no opportunity ever goes to waste.</p>
+    <div class="hero-actions">
+      <a href="#funding" class="btn-primary">🚀 Get Business Funding</a>
+      <a href="#services" class="btn-secondary">Explore Services →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">$250K+</div>
+        <div class="stat-label">Funding Facilitated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Revenue Streams</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Bitcoin ATM Access</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-tag reveal">What We Do</span>
+  <h2 class="section-title reveal">Multiple Streams.<br/>One Trusted Partner.</h2>
+  <p class="section-sub reveal">From wholesale products to crypto infrastructure to business capital — Sherpa Link has you covered.</p>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">📦</span>
+      <h3>Wholesale Brokerage</h3>
+      <p>We source quality wholesale products and connect retailers with cost-effective inventory — so your shelves stay stocked and your margins stay healthy.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">₿</span>
+      <h3>Bitcoin ATM Distribution</h3>
+      <p>Authorized Bitcoin Depot ATM distributor. We help businesses add a Bitcoin ATM to their location — a passive revenue stream with zero crypto expertise needed.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💼</span>
+      <h3>Business Funding & Finance</h3>
+      <p>Helping small and mid-sized businesses access capital fast. Whether it's working capital, equipment financing, or credit building — we connect you to the right solution.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔗</span>
+      <h3>Affiliate Partnerships</h3>
+      <p>Our network of curated affiliate partners means every lead is a potential win. If we can't serve you directly, we know someone who can — and you benefit either way.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏷️</span>
+      <h3>Product Clearance Deals</h3>
+      <p>Liquidation and clearance inventory at unbeatable prices. Retailers and resellers get first access to deeply discounted products through our WhatsApp group drops.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🤝</span>
+      <h3>Business Buy & Sell</h3>
+      <p>Looking to acquire a business, sell one, or find a partner? We broker business listings and connect serious buyers with motivated sellers discreetly and professionally.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏛️</span>
+      <h3>Tax Prep & Business Structuring</h3>
+      <p>We help entrepreneurs consolidate multiple businesses into a streamlined enterprise — the right structure, the right tax strategy, maximum protection and efficiency.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING HIGHLIGHT -->
+<section id="funding">
+  <div class="funding-grid">
+    <div>
+      <span class="section-tag reveal">Business Funding</span>
+      <h2 class="section-title reveal">Capital When<br/>You Need It Most.</h2>
+      <p class="section-sub reveal" style="margin-bottom:0;">We specialize in getting businesses funded — fast. No long waits, no confusing paperwork mazes.</p>
+      <div class="funding-features reveal">
+        <div class="funding-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">
+            <h4>Working Capital Loans</h4>
+            <p>Short-term capital to cover operations, inventory, and growth expenses.</p>
+          </div>
+        </div>
+        <div class="funding-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">
+            <h4>Equipment Financing</h4>
+            <p>Get the equipment your business needs without draining your cash reserves.</p>
+          </div>
+        </div>
+        <div class="funding-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">
+            <h4>Merchant Cash Advances</h4>
+            <p>Revenue-based financing that grows with your business — not against it.</p>
+          </div>
+        </div>
+        <div class="funding-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">
+            <h4>Business Credit Building</h4>
+            <p>Build a strong business credit profile to unlock better rates and higher limits.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:2.5rem;" class="reveal">
+        <a href="#contact" class="btn-primary">Apply for Funding →</a>
+      </div>
+    </div>
+    <div class="funding-visual reveal">
+      <div class="funding-visual-title">Typical Funding Range</div>
+      <div class="amount-display"><span>$</span>5K – 500K</div>
+      <div class="amount-sub">Funding available for qualifying businesses</div>
+
+      <div>
+        <div class="progress-label"><span>Startups</span><span>$5K – $50K</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="--w: 40%"></div></div>
+      </div>
+      <div>
+        <div class="progress-label"><span>Small Business</span><span>$50K – $150K</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="--w: 65%"></div></div>
+      </div>
+      <div>
+        <div class="progress-label"><span>Mid-Market</span><span>$150K – $500K</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="--w: 88%"></div></div>
+      </div>
+
+      <p style="color:var(--muted);font-size:0.8rem;margin-top:1.5rem;">Approval in as little as 24–72 hrs. Rates vary by program.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLEARANCE DEALS -->
+<section id="clearance">
+  <span class="section-tag reveal">Product Clearance</span>
+  <h2 class="section-title reveal">Flash Deals.<br/>Real Savings.</h2>
+  <p class="section-sub reveal">Liquidation and clearance inventory at unbeatable wholesale prices. Retailers, resellers, and hustlers — this is your edge. Join our WhatsApp group to get first access to every drop.</p>
+
+  <div class="deals-banner reveal">
+    <span>🔥</span>
+    <div>New drops added regularly — <strong>WhatsApp group members get first access</strong> before anything goes public.</div>
+  </div>
+
+  <div class="deals-grid reveal">
+    <div class="deal-card">
+      <div class="deal-img-placeholder" style="background:rgba(201,168,76,0.05);">
+        📦
+        <div class="deal-badge">Clearance</div>
+      </div>
+      <div class="deal-body">
+        <h4>Mixed Electronics Lot</h4>
+        <p>Assorted consumer electronics — earbuds, chargers, accessories. Resell or retail ready.</p>
+        <div class="deal-pricing">
+          <span class="deal-price">Contact</span>
+          <span class="deal-saving">Wholesale Only</span>
+        </div>
+        <a href="https://wa.me/14102365769?text=Hi%2C%20I'm%20interested%20in%20the%20electronics%20lot!" class="deal-cta" target="_blank">📲 Inquire on WhatsApp</a>
+      </div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-img-placeholder" style="background:rgba(201,168,76,0.04);">
+        👗
+        <div class="deal-badge">Limited Stock</div>
+      </div>
+      <div class="deal-body">
+        <h4>Apparel & Accessories Bundle</h4>
+        <p>Brand name clothing lots and accessories. Great for boutiques, flea markets, and online resellers.</p>
+        <div class="deal-pricing">
+          <span class="deal-price">Contact</span>
+          <span class="deal-saving">Bulk Pricing</span>
+        </div>
+        <a href="https://wa.me/14102365769?text=Hi%2C%20I'm%20interested%20in%20the%20apparel%20bundle!" class="deal-cta" target="_blank">📲 Inquire on WhatsApp</a>
+      </div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-img-placeholder" style="background:rgba(201,168,76,0.05);">
+        🏠
+        <div class="deal-badge">Hot Deal</div>
+      </div>
+      <div class="deal-body">
+        <h4>Home Goods Clearance</h4>
+        <p>Kitchen, décor, and household items from major retailers at deep discount. Pallet and case quantities available.</p>
+        <div class="deal-pricing">
+          <span class="deal-price">Contact</span>
+          <span class="deal-saving">Pallet Pricing</span>
+        </div>
+        <a href="https://wa.me/14102365769?text=Hi%2C%20I'm%20interested%20in%20home%20goods%20clearance!" class="deal-cta" target="_blank">📲 Inquire on WhatsApp</a>
+      </div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-img-placeholder" style="background:rgba(201,168,76,0.04);">
+        ➕
+      </div>
+      <div class="deal-body">
+        <h4>More Deals Coming</h4>
+        <p>We add new clearance lots weekly. Join the WhatsApp broadcast group to never miss a drop.</p>
+        <div class="deal-pricing">
+          <span class="deal-price">Free to Join</span>
+        </div>
+        <a href="https://wa.me/14102365769?text=Hi%2C%20I'd%20like%20to%20join%20the%20Sherpa%20Link%20deals%20group!" class="deal-cta" target="_blank">💬 Join WhatsApp Group</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUY & SELL LISTINGS -->
+<section id="buysell">
+  <span class="section-tag reveal">Business Marketplace</span>
+  <h2 class="section-title reveal">Buy, Sell &<br/>Partner Up.</h2>
+  <p class="section-sub reveal">Whether you're looking to acquire a business, exit one you've built, or find the right strategic partner — Sherpa Link connects serious people with serious opportunities.</p>
+
+  <div class="buysell-tabs reveal">
+    <button class="tab-btn active" onclick="showTab('forsale', this)">🏪 For Sale</button>
+    <button class="tab-btn" onclick="showTab('wanted', this)">🔍 Wanted</button>
+    <button class="tab-btn" onclick="showTab('partners', this)">🤝 Seeking Partners</button>
+  </div>
+
+  <div id="tab-forsale" class="listings-grid reveal">
+    <div class="listing-card">
+      <span class="listing-type">For Sale</span>
+      <h4>Established Retail Store</h4>
+      <p>Profitable brick-and-mortar retail shop with loyal customer base, inventory included. Turnkey operation ready for new ownership.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">📍 Location on Request</span>
+        <span class="meta-pill">📆 5 Yrs Operating</span>
+        <span class="meta-pill">💵 Cash Flow Positive</span>
+      </div>
+      <div class="listing-ask">Asking: Contact for Price</div>
+      <a href="#contact" class="listing-btn">Request Details →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">For Sale</span>
+      <h4>E-Commerce Brand</h4>
+      <p>Branded online store with established supplier relationships, social following, and repeat customer base. Includes all digital assets.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🌐 Online Business</span>
+        <span class="meta-pill">📦 Dropship + Inventory</span>
+        <span class="meta-pill">📈 Growing Revenue</span>
+      </div>
+      <div class="listing-ask">Asking: Contact for Price</div>
+      <a href="#contact" class="listing-btn">Request Details →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">For Sale</span>
+      <h4>Service Business — Your Industry</h4>
+      <p>Have a business to sell? List it here. We connect you confidentially with pre-qualified buyers through our network.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🔒 Confidential</span>
+        <span class="meta-pill">✅ Vetted Buyers</span>
+      </div>
+      <div class="listing-ask">Submit Your Listing</div>
+      <a href="#contact" class="listing-btn">List Your Business →</a>
+    </div>
+  </div>
+
+  <div id="tab-wanted" class="listings-grid reveal" style="display:none;">
+    <div class="listing-card">
+      <span class="listing-type">Wanted to Buy</span>
+      <h4>Laundromat / Coin Laundry</h4>
+      <p>Serious buyer seeking established laundromat with consistent cash flow. Willing to pay fair market value. Can close quickly.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">💰 Pre-Qualified Buyer</span>
+        <span class="meta-pill">⚡ Fast Close</span>
+      </div>
+      <div class="listing-ask">Budget: Contact to Discuss</div>
+      <a href="#contact" class="listing-btn">Connect with Buyer →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">Wanted to Buy</span>
+      <h4>Food & Beverage Business</h4>
+      <p>Looking for an established restaurant, food truck, or catering company with a proven concept and existing revenue.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🍽️ Food & Bev</span>
+        <span class="meta-pill">📍 Flexible Location</span>
+      </div>
+      <div class="listing-ask">Budget: Contact to Discuss</div>
+      <a href="#contact" class="listing-btn">Connect with Buyer →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">Submit a Want</span>
+      <h4>Looking for Something Specific?</h4>
+      <p>Tell us what type of business you're looking to acquire and we'll match you with sellers in our network confidentially.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🔒 Confidential</span>
+        <span class="meta-pill">🔗 Network Matched</span>
+      </div>
+      <div class="listing-ask">Submit Your Criteria</div>
+      <a href="#contact" class="listing-btn">Get Matched →</a>
+    </div>
+  </div>
+
+  <div id="tab-partners" class="listings-grid reveal" style="display:none;">
+    <div class="listing-card">
+      <span class="listing-type">Seeking Partner</span>
+      <h4>Logistics & Distribution</h4>
+      <p>Operator with warehouse space and routes seeking a capital or inventory partner to scale a distribution operation.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🚚 Logistics</span>
+        <span class="meta-pill">📦 Warehouse Ready</span>
+      </div>
+      <div class="listing-ask">Partnership Open</div>
+      <a href="#contact" class="listing-btn">Explore Partnership →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">Seeking Partner</span>
+      <h4>Wholesale Buying Group</h4>
+      <p>Join forces with other buyers to access even deeper wholesale pricing through a joint buying group. Strength in numbers.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">🤝 Group Buy</span>
+        <span class="meta-pill">💸 Better Margins</span>
+      </div>
+      <div class="listing-ask">Open to Members</div>
+      <a href="#contact" class="listing-btn">Learn More →</a>
+    </div>
+    <div class="listing-card">
+      <span class="listing-type">Post a Listing</span>
+      <h4>Have a Partnership Opportunity?</h4>
+      <p>List your partnership opportunity and let us match you with the right person from our network of vetted entrepreneurs.</p>
+      <div class="listing-meta">
+        <span class="meta-pill">✅ Vetted Network</span>
+        <span class="meta-pill">🔒 Confidential</span>
+      </div>
+      <div class="listing-ask">Post for Free</div>
+      <a href="#contact" class="listing-btn">Submit Listing →</a>
+    </div>
+  </div>
+
+  <div class="buysell-submit reveal">
+    <div class="buysell-submit-text">
+      <h3>Have a Business to List?</h3>
+      <p>Submit your listing confidentially. We'll review and connect you with pre-qualified buyers or partners from our network — at no upfront cost.</p>
+    </div>
+    <a href="#contact" class="btn-primary">Submit a Listing →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TAX & BUSINESS STRUCTURING -->
+<section id="tax">
+  <div class="tax-grid">
+    <div>
+      <span class="section-tag reveal">Tax & Business Structuring</span>
+      <h2 class="section-title reveal">Turn Your Hustle<br/>Into an <em style="font-style:normal;color:var(--gold);">Empire.</em></h2>
+      <p style="color:var(--muted);font-size:0.98rem;margin-bottom:2rem;" class="reveal">You've built multiple income streams — now it's time to structure them properly. We help entrepreneurs consolidate businesses under one enterprise, minimize tax liability, and set up for serious growth.</p>
+
+      <div class="tax-features reveal">
+        <div class="tax-feature">
+          <div class="tax-icon">🏛️</div>
+          <div class="tax-feature-text">
+            <h4>LLC & Corporation Formation</h4>
+            <p>Set up the right legal entity — LLC, S-Corp, C-Corp, or holding company — based on your goals and tax situation.</p>
+          </div>
+        </div>
+        <div class="tax-feature">
+          <div class="tax-icon">🗂️</div>
+          <div class="tax-feature-text">
+            <h4>Tax Preparation & Filing</h4>
+            <p>Business and personal tax returns prepared accurately. We find every deduction so you keep more of what you earn.</p>
+          </div>
+        </div>
+        <div class="tax-feature">
+          <div class="tax-icon">🏗️</div>
+          <div class="tax-feature-text">
+            <h4>Enterprise Structuring</h4>
+            <p>Have 2, 3, or 5+ businesses? We build a holding company structure that consolidates them into one clean, protected enterprise.</p>
+          </div>
+        </div>
+        <div class="tax-feature">
+          <div class="tax-icon">🛡️</div>
+          <div class="tax-feature-text">
+            <h4>Asset Protection</h4>
+            <p>Separate personal assets from business risk. Protect what you've built from liability, lawsuits, and creditors.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;" class="reveal">
+        <a href="#contact" class="btn-primary">Book a Strategy Call →</a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="enterprise-diagram">
+        <div class="diagram-title">⚙ Enterprise Structure Example</div>
+        <div class="diagram-tree">
+          <div class="diagram-node root">🏛 Sherpa Link Holdings LLC</div>
+          <div class="diagram-connector"></div>
+          <div class="diagram-row">
+            <div class="diagram-branch">
+              <div class="diagram-node">📦 Wholesale Co.</div>
+            </div>
+            <div class="diagram-branch">
+              <div class="diagram-node">₿ BTC ATM LLC</div>
+            </div>
+            <div class="diagram-branch">
+              <div class="diagram-node">💼 Funding Co.</div>
+            </div>
+          </div>
+          <div style="height:16px;"></div>
+          <div class="diagram-row">
+            <div class="diagram-branch">
+              <div class="diagram-node">🔗 Affiliates</div>
+            </div>
+            <div class="diagram-branch">
+              <div class="diagram-node">🏷 Clearance</div>
+            </div>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:0.78rem;margin-top:1.8rem;text-align:center;line-height:1.6;">All entities protected under one holding structure.<br/>Shared admin, separate liability, unified tax strategy.</p>
+      </div>
+
+      <div class="tax-packages">
+        <div class="tax-pkg">
+          <span class="pkg-label">Starter</span>
+          <h4>Single Entity Setup</h4>
+          <p>LLC formation, EIN, operating agreement & basic tax setup for one business.</p>
+        </div>
+        <div class="tax-pkg featured">
+          <span class="pkg-label">Most Popular</span>
+          <h4>Enterprise Package</h4>
+          <p>Holding company + multiple subsidiaries, full structuring & tax strategy session.</p>
+        </div>
+        <div class="tax-pkg">
+          <span class="pkg-label">Annual</span>
+          <h4>Tax Preparation</h4>
+          <p>Business & personal returns, quarterly planning, and year-round advisory access.</p>
+        </div>
+        <div class="tax-pkg">
+          <span class="pkg-label">Add-On</span>
+          <h4>Asset Protection Plan</h4>
+          <p>Liability separation, trust structures, and personal asset shielding strategies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AFFILIATES -->
+<section id="affiliates">
+  <div class="affiliates-intro">
+    <div>
+      <span class="section-tag reveal">Affiliate Network</span>
+      <h2 class="section-title reveal">No Lead<br/>Left Behind.</h2>
+    </div>
+    <div>
+      <p style="color:var(--muted);padding-top:1rem;" class="reveal">We've built a network of trusted partner programs across insurance, credit, fintech, and more. If Sherpa Link can't serve you, our partners will — and every referral is a win-win.</p>
+    </div>
+  </div>
+
+  <div class="affiliate-cards reveal">
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">🏦</span>
+      <h4>Business Banking</h4>
+      <p>Open business checking accounts with top neobanks offering cash bonuses.</p>
+      <span class="aff-arrow">Learn More →</span>
+    </a>
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">🛡️</span>
+      <h4>Business Insurance</h4>
+      <p>Affordable liability, auto, and commercial property insurance for businesses.</p>
+      <span class="aff-arrow">Learn More →</span>
+    </a>
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">📊</span>
+      <h4>Credit Repair</h4>
+      <p>Partner programs that help clients repair personal and business credit scores.</p>
+      <span class="aff-arrow">Learn More →</span>
+    </a>
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">⚡</span>
+      <h4>Energy Savings</h4>
+      <p>Commercial energy programs that reduce business utility costs significantly.</p>
+      <span class="aff-arrow">Learn More →</span>
+    </a>
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">📱</span>
+      <h4>Merchant Services</h4>
+      <p>POS systems and payment processing at competitive rates for retailers.</p>
+      <span class="aff-arrow">Learn More →</span>
+    </a>
+    <a href="#contact" class="affiliate-card">
+      <span class="aff-icon">🌐</span>
+      <h4>More Partners</h4>
+      <p>Reach out — if we don't have a solution, we'll find someone in our network who does.</p>
+      <span class="aff-arrow">Contact Us →</span>
+    </a>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="wa-block">
+    <span class="wa-icon">📲</span>
+    <span class="section-tag" style="text-align:center;display:block;">Exclusive Community</span>
+    <h2 class="section-title reveal">Join the<br/>Sherpa Link Group</h2>
+    <p class="section-sub reveal">Get exclusive access to wholesale product deals, flash sales, and business tips dropped directly in our private WhatsApp broadcast group. First to know, first to win.</p>
+    <a href="https://wa.me/14102365769?text=Hi%2C%20I%27d%20like%20to%20join%20the%20Sherpa%20Link%20group!" class="btn-primary reveal" target="_blank" rel="noopener">
+      💬 Join the WhatsApp Group
+    </a>
+    <p style="color:var(--muted);font-size:0.82rem;margin-top:1.2rem;" class="reveal">Wholesale deals · Product drops · Business tips · No spam. Ever.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <span class="section-tag reveal">Get In Touch</span>
+      <h2 class="section-title reveal">Let's Talk<br/>Business.</h2>
+      <p class="section-sub reveal">Whether you need funding, wholesale deals, a Bitcoin ATM, or just want to explore what's possible — send us a message.</p>
+
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-item-icon">📲</div>
+          <div class="contact-item-text">
+            <h4>WhatsApp</h4>
+            <a href="https://wa.me/14102365769">Message us directly</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div class="contact-item-text">
+            <h4>Email</h4>
+            <a href="mailto:familyofsherpas@gmail.com">familyofsherpas@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <h4>Response Time</h4>
+            <p>Usually within a few hours</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="John" />
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@yourbusiness.com" />
+        </div>
+        <div class="form-field">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="form-field">
+          <label>I'm interested in</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Business Funding</option>
+            <option>Wholesale Products</option>
+            <option>Bitcoin ATM Placement</option>
+            <option>Clearance / Product Deal</option>
+            <option>Business For Sale Listing</option>
+            <option>Looking to Buy a Business</option>
+            <option>Partnership Opportunity</option>
+            <option>Tax Preparation</option>
+            <option>Business Structuring / Enterprise Setup</option>
+            <option>Affiliate Partnership</option>
+            <option>Join WhatsApp Group</option>
+            <option>Something Else</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Tell us a little about your business and what you're looking for..."></textarea>
+        </div>
+        <button onclick="alert('Thanks! We\'ll be in touch soon. 🙌')" class="btn-primary" style="border:none;cursor:pointer;width:100%;justify-content:center;">
+          Send Message 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Sherpa<span>Link</span></div>
+  <p>© 2026 Sherpa Link. All rights reserved.</p>
+  <nav>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#funding">Funding</a></li>
+      <li><a href="#clearance">Deals</a></li>
+      <li><a href="#buysell">Buy & Sell</a></li>
+      <li><a href="#tax">Tax & Structure</a></li>
+      <li><a href="#affiliates">Partners</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Tab switching for Buy & Sell
+  function showTab(tab, btn) {
+    document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).style.display = 'grid';
+    btn.classList.add('active');
+  }
+</script>
